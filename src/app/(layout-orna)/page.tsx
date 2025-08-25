@@ -9,7 +9,7 @@ export default async function Header() {
    const session = await auth();
   
     if(!session?.user){
-      redirect("/")
+      redirect("/home")
     }
 
   
