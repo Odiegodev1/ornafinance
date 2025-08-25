@@ -19,7 +19,8 @@
 
 # production
 /build
-
+.eslintignore
+src/generated/
 # misc
 .DS_Store
 *.pem
