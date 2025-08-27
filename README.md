@@ -17,7 +17,7 @@ OrnaFinance é uma aplicação de **gestão de finanças pessoais** desenvolvida
 ## 🖥️ Demonstração
 
 ### Dashboard com Resumo Financeiro
-![Dashboard](./public/screenshots/dashboard.png)
+![Dashboard](./public/logos/Capturadetela_8.png)
 
 ### Listagem de Transações
 ![Transações](./public/screenshots/transactions.png)
