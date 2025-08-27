@@ -16,14 +16,9 @@ OrnaFinance é uma aplicação de **gestão de finanças pessoais** desenvolvida
 
 ## 🖥️ Demonstração
 
-### Dashboard com Resumo Financeiro
+### Resumo do app
 ![Dashboard](./public/logos/Screenshot_8.png)
 
-### Listagem de Transações
-![Transações](./public/screenshots/transactions.png)
-
-> ⚠️ Substitua os exemplos acima pelas imagens reais do seu projeto.  
-> Sugestão: crie uma pasta `public/screenshots/` no projeto para organizar as prints.
 
 ---
 
@@ -42,7 +37,7 @@ OrnaFinance é uma aplicação de **gestão de finanças pessoais** desenvolvida
 
 ```bash
 # Clone o repositório
-git clone https://github.com/SEU-USUARIO/ornafinance.git
+git clone https://github.com/odiegodev1/ornafinance.git
 
 # Acesse a pasta
 cd ornafinance
