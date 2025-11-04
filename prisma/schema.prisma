@@ -47,62 +47,47 @@ model User {
     password   String? 
   accounts      Account[]
   sessions      Session[]
-  transactions  Transaction[]
-  categories    Category[]  // relação com categorias criadas pelo usuário
-
+  obras         Obra[]
   @@map("users")
 }
  
-model VerificationToken {
-  identifier String
-  token      String
-  expires    DateTime
+
  
-  @@unique([identifier, token])
-  @@map("verification_tokens")
+model Obra {
+  id            Int                @id @default(autoincrement())
+  nomeCliente   String
+  telefone      String
+  endereco      String
+  tipoServico   String
+  descricao     String
+  prazoDias     Int
+  valorTotal    Float
+  materiais     OrcamentoItem[]    
+  maoDeObra     OrcamentoMaoObra[] 
+  createdAt     DateTime           @default(now())
+  updatedAt     DateTime           @updatedAt
+  status        String             @default("aguardando") 
+  publicId      String             @unique @default(uuid())
+
+  user          User               @relation(fields: [userId], references: [id])
+  userId        String
 }
 
-model Transaction {
-  id          String     @id @default(cuid())
-  userId      String
-  user        User       @relation(fields: [userId], references: [id])
-
-  description String
-  amount      Float
-  type        TransactionType
-  method      PaymentMethod
-  date        DateTime @default(now())
-
-  personName  String
-  personImage String?
-
-  categoryId  String?     // opcional para não quebrar transações antigas
-  category    Category?   @relation(fields: [categoryId], references: [id])
-
-  createdAt   DateTime @default(now())
+model OrcamentoItem {
+  id        Int     @id @default(autoincrement())
+  obra      Obra    @relation(fields: [obraId], references: [id])
+  obraId    Int
+  quantidade Int
+  descricao String
+  medida    String
+  valor     Float?
 }
 
-model Category {
-  id        String        @id @default(cuid())
-  userId    String
-  user      User          @relation(fields: [userId], references: [id])
-  name      String
-  color     String?
-
-  createdAt DateTime      @default(now())
-
-  transactions Transaction[]
-
-  @@unique([userId, name])
-}
-
-enum TransactionType {
-  RECEITA
-  DESPESA
-}
-
-enum PaymentMethod {
-  PIX
-  CARTAO_CREDITO
-  DINHEIRO
+model OrcamentoMaoObra {
+  id        Int     @id @default(autoincrement())
+  obra      Obra    @relation(fields: [obraId], references: [id])
+  obraId    Int
+  tipo      String
+  descricao String
+  valor     Float
 }

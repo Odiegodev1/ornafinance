@@ -10,8 +10,25 @@ import { CopyIcon, Locate, PhoneCall, User, View } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { CreateOrcamento } from "./create_orcamento";
+import Tabela_Orcamento from "@/components/tabela-orcameto/page";
 
-export function DialogApp(){
+
+interface ObraDialogProps {
+  obra: {
+    id: number;
+    publicId: string;
+    nomeCliente: string;
+    telefone: string;
+    endereco: string;
+    tipoServico: string;
+    descricao: string;
+    prazoDias: number;
+    valorTotal: number;
+    status: string;
+  };
+}
+
+export function DialogApp({obra}: ObraDialogProps) {
     return(
         <>
         <Dialog>
@@ -34,7 +51,7 @@ export function DialogApp(){
         </DialogTrigger>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle className="md:text-md text-sm ">Telhado</DialogTitle>
+            <DialogTitle className="md:text-md text-sm ">{obra.tipoServico}</DialogTitle>
           </DialogHeader>
 
           <Tabs
@@ -61,42 +78,42 @@ export function DialogApp(){
               <div className=" flex flex-col gap-3 text-sm text-zinc-600">
                 <p className="flex items-center gap-1">
                   <User />
-                  Nome:  Adriana
+                  Nome:  {obra.nomeCliente}
                 </p>
                 <p className="flex items-center gap-1">
                   <PhoneCall />
-                  Telefone: (22) 99999-9999
+                  Telefone: {obra.telefone}
                 </p>
                 <p className="flex items-center gap-1">
                   <Locate />
-                  Endereço:  Rua 1 com 21 saquarema-rj
+                  Endereço:  {obra.endereco}
                 </p>
               </div>
               <div>
                 <h1>Detalhes do Orçamento</h1>
                 <div className=" mt-2 text-zinc-600 text-sm space-y-1">
-                  <p>Tipo de Serviço: Telhado</p>
-                  <p>Descrição do serviço: Telhado caiu</p>
+                  <p>Tipo de Serviço: {obra.tipoServico}</p>
+                  <p>Descrição do serviço: {obra.descricao}</p>
                   <p>
-                    Prazo Estimado de entrega: 7 Dias de Trabalho
+                    Prazo Estimado de entrega: {obra.prazoDias} Dias de Trabalho
                   </p>
                 </div>
               </div>
               <div>
                 <h1>Material</h1>
                 <div className="">
-                  ---------------
+                  <Tabela_Orcamento obraId={obra.id} />
                 </div>
               </div>
               <div>
                 <h1>Mão de Obra</h1>
                 <div className="px-4">
-                  <p> Mão de obra: R$ 749.00 </p>
+                  <p> Mão de obra: R$ {obra.valorTotal.toFixed(2)} </p>
                 </div>
               </div>
             </TabsContent>
             <TabsContent value="criarorcamento">
-              <CreateOrcamento  />
+              <CreateOrcamento obraId={obra.id}  />
             </TabsContent>
             <TabsContent value="processobra">
               <h1 className="mt-2">Editar Processo da Obra</h1>

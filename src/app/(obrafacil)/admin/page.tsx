@@ -1,17 +1,23 @@
 
+""
 import { Cardcontent } from "@/app/(obrafacil)/admin/_components/Cardcontent";
 import { auth } from "@/lib/auth";
 import { HardHat } from "lucide-react";
 import { redirect } from "next/navigation";
 import { CreateObra } from "./_components/create_obra";
+import { prisma } from "@/lib/prisma";
+
 
 export default async function AdminPage(){
-    const session = await auth();
-  
-    if(!session?.user){
-      redirect("/")
-    }
 
+const UserObras = await prisma.obra.findMany({
+    include: { materiais: true },
+    orderBy: { createdAt: "desc" },
+})
+if(!UserObras){
+    alert("Ocorreu um erro ao carregar as obras")
+    return;
+}
    
 
     return(
@@ -27,7 +33,7 @@ export default async function AdminPage(){
 
             </header>
             <main className="flex flex-col items-start px-5 py-8 ">
-             <Cardcontent />
+             <Cardcontent obras={UserObras} />
             
              
          </main>

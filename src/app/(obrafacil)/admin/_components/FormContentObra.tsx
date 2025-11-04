@@ -40,7 +40,12 @@ const form = useForm<CreateFormObra>({
   },
 })
     const handleorcamento = async (data: CreateFormObra) => {
-        await RegisterOrcamento(data)
+       const response = await RegisterOrcamento(data)
+       if(!response){
+        alert("Ocorreu um erro ao cadastrar")
+       }
+       alert("Orcamento cadastrado com sucesso")
+       return;
     }
      
 

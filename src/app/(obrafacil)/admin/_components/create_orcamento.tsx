@@ -15,16 +15,27 @@ import {
 } from "@/components/ui/form"
 import { createFormOrcamento, CreateFormOrcamento } from "../_schema/CreateFormOrcamento";
 import { getOrcamento } from "../_actions/get-orcamento";
+ 
+interface CreateOrcamentoProps {
+    obraId: number;
+}
 
-export function CreateOrcamento() {
+
+export function CreateOrcamento({obraId}: CreateOrcamentoProps){ 
        const form = useForm<CreateFormOrcamento>({
         resolver: zodResolver(createFormOrcamento),
         defaultValues: {
           orcamento: "",
+          ObraId: obraId
         }})
 
         const handleOrcamento = async (data: CreateFormOrcamento) => {
-            await getOrcamento(data)
+            const response = await getOrcamento(data)
+            if(!response){
+                alert("Ocorreu um erro ao cadastrar")
+            }
+            alert("Orcamento cadastrado com sucesso")
+            return;
         }
 
     return(
