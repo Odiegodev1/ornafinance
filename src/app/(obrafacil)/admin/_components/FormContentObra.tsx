@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
+import { Resolver } from "react-hook-form"
 
 import {
   Form,
@@ -26,19 +27,18 @@ export function FormContentObra() {
 
 
  
-     const form = useForm<CreateFormObra>({
-        resolver: zodResolver(createformobra) as any ,
-        defaultValues: {
-        nomeCliente: "",
-          telefone: "",
-          endereco: "",
-          tipoServico: "",
-          descricao: "",
-          prazoDias: 10,
-          valorTotal: 10,
-            
-          
-        }})
+const form = useForm<CreateFormObra>({
+  resolver: zodResolver(createformobra) as unknown as Resolver<CreateFormObra>,
+  defaultValues: {
+    nomeCliente: "",
+    telefone: "",
+    endereco: "",
+    tipoServico: "",
+    descricao: "",
+    prazoDias: 10,
+    valorTotal: 10,
+  },
+})
     const handleorcamento = async (data: CreateFormObra) => {
         await RegisterOrcamento(data)
     }
