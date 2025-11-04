@@ -9,10 +9,14 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet"
-
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "../tabs"
+import { TransactionForm } from "./forms/formtransferir"
+import { FormCategory } from "./forms/formcategory"
+import Router from "next/router"
 
 
 export const CardAddMoney = () => {
+  const router = Router
     return(
         <Sheet>
             <SheetTrigger>
@@ -33,15 +37,27 @@ export const CardAddMoney = () => {
            
 
         </Card></SheetTrigger>
-          <SheetContent>
-    <SheetHeader>
-      <SheetTitle>Are you absolutely sure?</SheetTitle>
+          <SheetContent className="p-3">
+     <SheetHeader>
+      <SheetTitle>Adicionar</SheetTitle>
       <SheetDescription>
-        This action cannot be undone. This will permanently delete your account
-        and remove your data from our servers.
+        Adicione uma renda manualmente
       </SheetDescription>
     </SheetHeader>
+          <Tabs defaultValue="Adicionar renda">
+        <TabsList>
+          <TabsTrigger value="Adicionar renda">Adicionar Uma Renda</TabsTrigger>
+          <TabsTrigger value="Criar uma categoria">Criar Uma Categoria</TabsTrigger>
+        </TabsList>
+        <TabsContent value="Adicionar renda">
+        <TransactionForm />  
+        </TabsContent>
+        <TabsContent value="Criar uma categoria">
+        <FormCategory />
+        </TabsContent>
+      </Tabs>
+
   </SheetContent>
-        </Sheet>
+         </Sheet>
     )
 }

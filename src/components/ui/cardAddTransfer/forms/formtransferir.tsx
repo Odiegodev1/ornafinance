@@ -21,10 +21,13 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { getUserCategories } from "@/actions/category";
 import { Category } from "@/generated/prisma";
 
+import { useRouter } from "next/navigation";
+
 export type TransactionFormValues = z.infer<typeof transactionSchema>;
 
 
 export const TransactionForm = ()  => {
+    const router = useRouter()
     const [categories, setCategories] = React.useState<Category[]>([]);
 
 React.useEffect(() => {
@@ -51,6 +54,7 @@ React.useEffect(() => {
       await  createTransaction(values);
       alert("Transação criada!");
       form.reset();
+      router.refresh();
     } catch (err) {
       console.error(err);
       alert("Erro ao criar transação");

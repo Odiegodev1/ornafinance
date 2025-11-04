@@ -1,6 +1,6 @@
 "use client"
 
-import { BadgeCheck, ChevronsUpDown, LogIn, LogOut } from "lucide-react"
+import {  ChevronsUpDown, LogIn, LogOut } from "lucide-react"
 import { Button } from "../button"
 import { signIn, signOut, useSession } from "next-auth/react"
 import { SidebarMenu, SidebarMenuButton, SidebarMenuItem, useSidebar } from "../sidebar"
@@ -8,6 +8,7 @@ import { SidebarMenu, SidebarMenuButton, SidebarMenuItem, useSidebar } from "../
 import { Avatar } from "./avatar"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "../dropdown-menu"
 import { Skeleton } from "../skeleton"
+
 
 export const NavUser = () => {
      const {data: session, status} = useSession()
@@ -72,10 +73,7 @@ export const NavUser = () => {
                       <DropdownMenuSeparator />
                       <DropdownMenuGroup>
 
-                        <DropdownMenuItem>
-                            <BadgeCheck />
-                            Gerenciar conta
-                        </DropdownMenuItem>
+                      
 
                       </DropdownMenuGroup>
                         <DropdownMenuSeparator />

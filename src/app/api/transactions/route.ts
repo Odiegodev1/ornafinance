@@ -20,3 +20,37 @@ export async function GET(req: Request) {
     return NextResponse.json({ error: "Erro ao buscar transacoes", status: 500 });
   }
 }
+
+export async function PUT(req: Request, {params}: {params: {id: string}}) {
+  try {
+    const body = await req.json();
+    const updated = await prisma.transaction.update({
+      where:{id: params.id},
+      data:{
+        description: body.description,
+        amount: body.amount,
+        type: body.type,
+        method: body.method,
+        categoryId: body.categoryId ?? null,
+      }
+    })
+    return NextResponse.json(updated);
+
+  }catch(err){
+    console.error(err);
+     return NextResponse.json({ error: "Erro ao editar transação" }, { status: 500 })
+  }
+}
+
+
+export async function DELETE(req: Request, { params }: { params: { id: string } }) {
+  try {
+    await prisma.transaction.delete({
+      where: { id: params.id },
+    })
+    return NextResponse.json({ success: true })
+  } catch (error) {
+    console.error("Erro ao excluir:", error)
+    return NextResponse.json({ error: "Erro ao excluir transação" }, { status: 500 })
+  }
+}

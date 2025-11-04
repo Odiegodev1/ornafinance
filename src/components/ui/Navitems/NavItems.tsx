@@ -14,7 +14,7 @@ export const NavItems = () => {
     const navItems: NavItems[] = [
         {
             label: "Dashboard",
-            path: "/",
+            path: "/dashboard",
             icon: LayoutDashboard
         },
          {
