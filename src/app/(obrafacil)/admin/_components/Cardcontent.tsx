@@ -10,11 +10,17 @@ interface CreateObraProps {
 }
 
 export function Cardcontent({obras}: CreateObraProps) {
-  
+
+   
     return (
   <div className="grid md:grid-cols-4 gap-4 w-full  ">
-{obras.map((obra) => (
-   <Card  key={obra.id}
+{obras.map((obra) => {
+   const valorFormatado = obra.valorTotal.toLocaleString("pt-BR", {
+          style: "currency",
+          currency: "BRL",
+        });
+  return(
+    <Card  key={obra.id}
              className="p-0 hover:scale-105 
              trasition-all duration-700 hover:shadow-2xl
               hover:shadow-orange-400  md:w-full  " >
@@ -28,12 +34,14 @@ export function Cardcontent({obras}: CreateObraProps) {
                      <div className="text-sm space-y-1 mb-2 ">
                         <p>Nome: {obra.nomeCliente}</p>
         
-                        <p>Valor da obra: R${obra.valorTotal.toFixed(2)}</p>
+                        <p>Valor da obra: {valorFormatado}</p>
                      </div>
                   <DialogApp obra={obra} />
                 </CardContent>
  </Card>
-))}
+  )
+   
+})}
   </div>
     )
 

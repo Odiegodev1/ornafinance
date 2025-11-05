@@ -19,6 +19,8 @@ import { Input } from "@/components/ui/input";
 
 import { createformobra, CreateFormObra } from "../_schema/CreateFormObra";
 import RegisterOrcamento from "../_actions/get-obra";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 
 
@@ -26,7 +28,8 @@ export function FormContentObra() {
 
 
 
- 
+const router = useRouter();
+
 const form = useForm<CreateFormObra>({
   resolver: zodResolver(createformobra) as unknown as Resolver<CreateFormObra>,
   defaultValues: {
@@ -41,11 +44,12 @@ const form = useForm<CreateFormObra>({
 })
     const handleorcamento = async (data: CreateFormObra) => {
        const response = await RegisterOrcamento(data)
-       if(!response){
-        alert("Ocorreu um erro ao cadastrar")
+       if(!response.error){
+        toast.error(response.error);
        }
-       alert("Orcamento cadastrado com sucesso")
-       return;
+       form.reset();
+       router.refresh();
+       toast.success("Obra cadastrada com sucesso");
     }
      
 

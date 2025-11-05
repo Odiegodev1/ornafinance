@@ -9,10 +9,9 @@ import {
 import { CopyIcon, Locate, PhoneCall, User, View } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
-import { CreateOrcamento } from "./create_orcamento";
+
 import Tabela_Orcamento from "@/components/tabela-orcameto/page";
 import { StatusApp } from "./status";
-
 
 
 interface ObraDialogProps {
@@ -30,14 +29,9 @@ interface ObraDialogProps {
   };
 }
 
-export function DialogApp({obra}: ObraDialogProps) {
+export function DialogUser({obra}: ObraDialogProps) {
   const linkPublico = `${process.env.NEXT_PUBLIC_HOST_URL}/user/${obra.publicId}`
-    const ValorFormatado = obra.valorTotal.toLocaleString("pt-BR", {
-      style: "currency",
-      currency: "BRL",
-    })
-  
-  return(
+    return(
         <>
         <Dialog>
         <div className="flex items-center justify-end mb-2">
@@ -70,7 +64,7 @@ export function DialogApp({obra}: ObraDialogProps) {
                 Orçamento
               </TabsTrigger>
               <TabsTrigger className="cursor-pointer" value="criarorcamento">
-                Criar Orçamento
+                Materias
               </TabsTrigger>
 
             </TabsList>
@@ -79,11 +73,11 @@ export function DialogApp({obra}: ObraDialogProps) {
                 Fotos da Obra
               </TabsTrigger>
               <TabsTrigger className="cursor-pointer" value="processobra">
-                Processo
+                Processo{" "}
               </TabsTrigger>
             </TabsList>
             <TabsContent value="orcamento">
-              <div className=" flex flex-col gap-3 text-sm text-zinc-600">
+              <div className=" flex flex-col gap-3 text-sm text-zinc-900">
                 <p className="flex items-center gap-1">
                   <User />
                   Nome:  {obra.nomeCliente}
@@ -97,9 +91,9 @@ export function DialogApp({obra}: ObraDialogProps) {
                   Endereço:  {obra.endereco}
                 </p>
               </div>
-              <div>
+              <div className="mt-4">
                 <h1>Detalhes do Orçamento</h1>
-                <div className=" mt-2 text-zinc-600 text-sm space-y-1">
+                <div className=" mt-2 text-zinc-900  text-sm space-y-2 mb-12 ">
                   <p>Tipo de Serviço: {obra.tipoServico}</p>
                   <p>Descrição do serviço: {obra.descricao}</p>
                   <p>
@@ -107,7 +101,7 @@ export function DialogApp({obra}: ObraDialogProps) {
                   </p>
                 </div>
               </div>
-              <div>
+              <div className="mb-9">
                 <h1>Material</h1>
                 <div className="">
                   <Tabela_Orcamento obraId={obra.id} />
@@ -116,16 +110,17 @@ export function DialogApp({obra}: ObraDialogProps) {
               <div>
                 <h1>Mão de Obra</h1>
                 <div className="px-4">
-                  <p> Mão de obra: {ValorFormatado}</p>
+                  <p> Mão de obra: R$ {obra.valorTotal.toFixed(2)} </p>
                 </div>
               </div>
             </TabsContent>
             <TabsContent value="criarorcamento">
-              <CreateOrcamento obraId={obra.id}  />
+              <h1>Materiais</h1>
+              <Tabela_Orcamento obraId={obra.id} />
             </TabsContent>
             <TabsContent value="processobra">
               <h1 className="mt-2">Editar Processo da Obra</h1>
-              <StatusApp obraId={obra.id }  />
+              <StatusApp obraId={obra.id} />
             </TabsContent>
             <TabsContent value="fotosobra">
              Fotos

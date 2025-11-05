@@ -3,6 +3,7 @@ import { Sora} from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { SessionProvider } from "next-auth/react";
+import { Toaster } from "sonner";
 
 const fontFamily = Sora({
   variable: "--font-Sora",
@@ -26,7 +27,7 @@ export default function RootLayout({
         className={cn(fontFamily.className, " antialiased font-sans ")}
       >
         <SessionProvider>
-
+           <Toaster />
            {children}
         </SessionProvider>
        

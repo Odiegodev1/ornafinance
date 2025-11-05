@@ -19,15 +19,15 @@ export default  function page(){
     <section className="flex flex-col min-h-scree w-full bg-zinc-100">
         <header className="flex p-2 md:px-50 w-full border-b-2 items-center justify-between">
           <div className="flex items-center gap-2">
-            no
+            
             <div className="flex bg-orange-400  items-center justify-center size-12 rounded-2xl">
               <HardHat className="size-8 text-white"/>
             </div>
             <h1 className="text-2xl font-bold">ObraFacil</h1>
           </div>
           <div className="gap-3 flex">
-            <Button onClick={handleLogin}  variant="outline" className="hidden text-black  border-zinc-900 md:flex">Entrar</Button>
-            <Button className="bg-orange-500 hover:bg-orange-600">Teste Gratis</Button>
+           
+            <Button onClick={handleLogin} className="bg-orange-500 hover:bg-orange-600">Teste Gratis</Button>
           </div>
         </header>
         <main className="flex flex-col bg-zinc-900">
@@ -71,7 +71,7 @@ export default  function page(){
           </div>
         <div className="flex md:flex-row flex-col gap-4 items-center justify-center ">
           <Button onClick={handleLogin} className=" w-xs h-15 bg-orange-500 hover:bg-orange-600 mt-8">Começar Gratís</Button>
-          <Button variant="outline" className="md:flex hidden h-15 mt-8 text-black">Entrar</Button>
+        
         </div>
       </div>
         </div>

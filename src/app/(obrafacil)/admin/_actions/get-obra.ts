@@ -37,7 +37,7 @@ export default async function RegisterOrcamento(data: CreateFormObra) {
             }
         }
         })
-        const likpublico = `${process.env.NEXT_PUBLIC_SITE_URL}`
+        const likpublico = `${process.env.NEXT_PUBLIC_HOST_URL}`
         console.log(likpublico)
         revalidatePath("/admin")
         return{
