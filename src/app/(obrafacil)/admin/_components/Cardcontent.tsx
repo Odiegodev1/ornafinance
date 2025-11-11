@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { Card, CardContent, CardTitle } from "../../../../components/ui/card";
 
-import Obra from "../../../../../public/obra.webp"
+import Obra from "../../../../../public/top.jpg"
 import { DialogApp } from "./DialogApp";
 import { Obra as Obras } from "@/generated/prisma";
 
@@ -23,7 +23,7 @@ export function Cardcontent({obras}: CreateObraProps) {
     <Card  key={obra.id}
              className="p-0 hover:scale-105 
              trasition-all duration-700 hover:shadow-2xl
-              hover:shadow-orange-400  md:w-full  " >
+              hover:shadow-violet-400  md:w-full  " >
                 <Image 
                 src={Obra}
                 alt="obra"

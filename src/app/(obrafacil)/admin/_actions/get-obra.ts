@@ -5,6 +5,7 @@ import { auth } from "@/lib/auth";
 import { CreateFormObra } from "../_schema/CreateFormObra";
 import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
+import { sendWhatsAppMessage } from "../../actions/zap";
 
 
 export default async function RegisterOrcamento(data: CreateFormObra) {
@@ -39,6 +40,14 @@ export default async function RegisterOrcamento(data: CreateFormObra) {
         })
         const likpublico = `${process.env.NEXT_PUBLIC_HOST_URL}`
         console.log(likpublico)
+
+        await sendWhatsAppMessage({
+        to: data.telefone,
+        nome: data.nomeCliente,
+        obraNome: data.tipoServico,
+        publicid: create_obra.publicId
+        });
+
         revalidatePath("/admin")
         return{
             data:{

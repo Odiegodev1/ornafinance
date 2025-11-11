@@ -37,7 +37,7 @@ export default  function page(){
            quality={100}
           className="w-full   absolute opacity-40 h-screen object-cover "
           />
-        
+          <h1>d</h1>
           <div className="space-y-9 relative max-w-5xl z-10 text-center -mt-8 text-white px-4">
 
       <div className="flex flex-col  items-center justify-center">

@@ -9,9 +9,10 @@ import {
 import { CopyIcon, Locate, PhoneCall, User, View } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
-import { CreateOrcamento } from "./create_orcamento";
-import Tabela_Orcamento from "@/components/tabela-orcameto/page";
+
 import { StatusApp } from "./status";
+import { FotosObra } from "./FotosObra";
+
 
 
 
@@ -45,7 +46,7 @@ export function DialogApp({obra}: ObraDialogProps) {
           <a
             href={linkPublico}
             target="_blank"
-            className="bg-orange-400 text-white px-2 py-2 rounded-lg hover:bg-orange-500"
+            className="bg-violet-400 text-white px-2 py-2 rounded-lg hover:bg-violet-500"
           >
             <View />
           </a>
@@ -55,7 +56,7 @@ export function DialogApp({obra}: ObraDialogProps) {
 
         </div>
         <DialogTrigger asChild>
-          <Button className="w-full  cursor-pointer">Ver mais</Button>
+          <Button className="w-full bg-violet-500 hover:bg-violet-600  cursor-pointer">Ver mais</Button>
         </DialogTrigger>
         <DialogContent>
           <DialogHeader>
@@ -65,16 +66,14 @@ export function DialogApp({obra}: ObraDialogProps) {
           <Tabs
           
           defaultValue="orcamento">
-            <TabsList className="grid grid-cols-2 bg-orange-500 gap-2  w-full ">
+            <TabsList className="grid grid-cols-1 bg-violet-500 gap-2  w-full ">
               <TabsTrigger className="cursor-pointer " value="orcamento">
                 Orçamento
               </TabsTrigger>
-              <TabsTrigger className="cursor-pointer" value="criarorcamento">
-                Criar Orçamento
-              </TabsTrigger>
+            
 
             </TabsList>
-            <TabsList className="grid grid-cols-2 bg-orange-500 gap-2 w-full  ">
+            <TabsList className="grid grid-cols-2 bg-violet-500 gap-2 w-full  ">
                             <TabsTrigger className="cursor-pointer" value="fotosobra">
                 Fotos da Obra
               </TabsTrigger>
@@ -82,8 +81,8 @@ export function DialogApp({obra}: ObraDialogProps) {
                 Processo
               </TabsTrigger>
             </TabsList>
-            <TabsContent value="orcamento">
-              <div className=" flex flex-col gap-3 text-sm text-zinc-600">
+            <TabsContent value="orcamento" className="space-y-4">
+              <div className=" flex flex-col gap-3 text-sm text-zinc-900">
                 <p className="flex items-center gap-1">
                   <User />
                   Nome:  {obra.nomeCliente}
@@ -99,7 +98,7 @@ export function DialogApp({obra}: ObraDialogProps) {
               </div>
               <div>
                 <h1>Detalhes do Orçamento</h1>
-                <div className=" mt-2 text-zinc-600 text-sm space-y-1">
+                <div className=" mt-2 text-zinc-900 text-sm space-y-1">
                   <p>Tipo de Serviço: {obra.tipoServico}</p>
                   <p>Descrição do serviço: {obra.descricao}</p>
                   <p>
@@ -107,28 +106,21 @@ export function DialogApp({obra}: ObraDialogProps) {
                   </p>
                 </div>
               </div>
+           
               <div>
-                <h1>Material</h1>
-                <div className="">
-                  <Tabela_Orcamento obraId={obra.id} />
-                </div>
-              </div>
-              <div>
-                <h1>Mão de Obra</h1>
+                <h1>Orçamento</h1>
                 <div className="px-4">
-                  <p> Mão de obra: {ValorFormatado}</p>
+                  <p> Valor do Orçamento: {ValorFormatado}</p>
                 </div>
               </div>
             </TabsContent>
-            <TabsContent value="criarorcamento">
-              <CreateOrcamento obraId={obra.id}  />
-            </TabsContent>
+            
             <TabsContent value="processobra">
               <h1 className="mt-2">Editar Processo da Obra</h1>
               <StatusApp obraId={obra.id }  />
             </TabsContent>
             <TabsContent value="fotosobra">
-             Fotos
+             <FotosObra obraId={obra.id} />
             </TabsContent>
           </Tabs>
         </DialogContent>

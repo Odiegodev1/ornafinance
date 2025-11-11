@@ -68,9 +68,18 @@ model Obra {
   updatedAt     DateTime           @updatedAt
   status        String             @default("aguardando") 
   publicId      String             @unique @default(uuid())
-
+  fotos        FotoObra[]
   user          User               @relation(fields: [userId], references: [id])
   userId        String
+}
+
+model FotoObra {
+  id        Int      @id @default(autoincrement())
+  nome      String
+  caminho   String
+  createdAt DateTime @default(now())
+  obraId    Int
+  obra      Obra     @relation(fields: [obraId], references: [id])
 }
 
 model OrcamentoItem {

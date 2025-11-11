@@ -1,9 +1,9 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { prisma } from "@/lib/prisma";
-import { HardHat, Phone } from "lucide-react";
+import { Phone, Smartphone } from "lucide-react";
 import Image from "next/image";
-import Obra from "../../../../../public/obra.webp"
+import Top from "../../../../../public/top.jpg"
 import { DialogUser } from "@/components/DialogUser";
 import { StatusApp } from "@/components/status";
 
@@ -18,7 +18,7 @@ export default async function UserPage({ params }: UserPageProps) {
 
 
  
-    const { id } =  params
+  const { id } =  params
  
   if (!id) return <div>Link inválido</div>;
 
@@ -31,12 +31,12 @@ export default async function UserPage({ params }: UserPageProps) {
  
     return (
           <section className="flex flex-col w-full min-h-screen">
-      <header className="border-b p-5 md:px-30 py-7 justify-between border-orange-200 h-12 w-full flex items-center">
+      <header className="border-b p-5 md:px-30 py-7 justify-between border-purple-200 h-12 w-full flex items-center">
         <div className="flex items-center gap-2">
-          <div className="flex justify-center items-center p-2 size-12 bg-orange-400 rounded-md">
-            <HardHat className="text-white" />
+          <div className="flex justify-center items-center p-2 size-12 bg-violet-400 rounded-md">
+            <Smartphone className="text-white" />
           </div>
-          <h1 className="text-2xl font-extrabold">Obra Facil</h1>
+          <h1 className="text-2xl font-extrabold">Troca Telas</h1>
         </div>
         <Button>
           <Phone /> WhatsApp
@@ -55,9 +55,9 @@ export default async function UserPage({ params }: UserPageProps) {
             </CardContent>
           </Card>
 
-          <Card className="p-0 hover:scale-105 transition-all duration-700 hover:shadow-2xl hover:shadow-orange-400 md:w-3xl">
+          <Card className="p-0 hover:scale-105 transition-all duration-700 hover:shadow-2xl hover:shadow-violet-400 md:w-3xl">
             <Image
-              src={Obra}
+              src={Top}
               alt="obra"
               className="w-full h-[245px] object-cover rounded-md"
             />

@@ -6,12 +6,13 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { CopyIcon, Locate, PhoneCall, User, View } from "lucide-react";
+import { Locate, PhoneCall, Smartphone, User,  } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 
 import Tabela_Orcamento from "@/components/tabela-orcameto/page";
 import { StatusApp } from "./status";
+import { FotosObra } from "@/app/(obrafacil)/admin/_components/FotosObra";
 
 
 interface ObraDialogProps {
@@ -30,26 +31,15 @@ interface ObraDialogProps {
 }
 
 export function DialogUser({obra}: ObraDialogProps) {
-  const linkPublico = `${process.env.NEXT_PUBLIC_HOST_URL}/user/${obra.publicId}`
-    return(
+  return(
         <>
         <Dialog>
         <div className="flex items-center justify-end mb-2">
-          <div className=" flex gap-3">
-          <a
-            href={linkPublico}
-            target="_blank"
-            className="bg-orange-400 text-white px-2 py-2 rounded-lg hover:bg-orange-500"
-          >
-            <View />
-          </a>
-
-          <Button><CopyIcon /></Button>
-        </div>
+          
 
         </div>
         <DialogTrigger asChild>
-          <Button className="w-full  cursor-pointer">Ver mais</Button>
+          <Button className="w-full bg-violet-500 hover:bg-violet-600 cursor-pointer">Ver mais</Button>
         </DialogTrigger>
         <DialogContent>
           <DialogHeader>
@@ -77,7 +67,11 @@ export function DialogUser({obra}: ObraDialogProps) {
               </TabsTrigger>
             </TabsList>
             <TabsContent value="orcamento">
-              <div className=" flex flex-col gap-3 text-sm text-zinc-900">
+              <div className=" flex flex-col gap-3 text-sm text-black">
+                <div className="mt-2 mb-2">
+                  <h1 className="text-center text-2xl font-semibold text-purple-600">Troca Telas e Muito + </h1>
+                  <p className="text-center text-zinc-600">Aconpanhe seu orçamento em tempo real</p>
+                </div>
                 <p className="flex items-center gap-1">
                   <User />
                   Nome:  {obra.nomeCliente}
@@ -92,8 +86,8 @@ export function DialogUser({obra}: ObraDialogProps) {
                 </p>
               </div>
               <div className="mt-4">
-                <h1>Detalhes do Orçamento</h1>
-                <div className=" mt-2 text-zinc-900  text-sm space-y-2 mb-12 ">
+                <h1 className="flex items-center gap-2 text-purple-600 font-semibold mb-2">Detalhes do Orçamento <Smartphone /></h1>
+                <div className=" mt-2 text-black  text-sm space-y-2 mb-12 ">
                   <p>Tipo de Serviço: {obra.tipoServico}</p>
                   <p>Descrição do serviço: {obra.descricao}</p>
                   <p>
@@ -101,16 +95,12 @@ export function DialogUser({obra}: ObraDialogProps) {
                   </p>
                 </div>
               </div>
-              <div className="mb-9">
-                <h1>Material</h1>
-                <div className="">
-                  <Tabela_Orcamento obraId={obra.id} />
-                </div>
-              </div>
+              
+          
               <div>
-                <h1>Mão de Obra</h1>
+                <h1 className="text-purple-600 font-semibold">Valor:</h1>
                 <div className="px-4">
-                  <p> Mão de obra: R$ {obra.valorTotal.toFixed(2)} </p>
+                  <p> Valor Total: R$ {obra.valorTotal.toFixed(2)} </p>
                 </div>
               </div>
             </TabsContent>
@@ -123,7 +113,7 @@ export function DialogUser({obra}: ObraDialogProps) {
               <StatusApp obraId={obra.id} />
             </TabsContent>
             <TabsContent value="fotosobra">
-             Fotos
+             <FotosObra obraId={obra.id} />
             </TabsContent>
           </Tabs>
         </DialogContent>
