@@ -46,7 +46,7 @@ export function Formcreatewallet({ categorias }: FormProps) {
     if (!response) {
       alert("Transação nao criada");
     }
-    alert("Transação criada com sucesso");
+    alert("Transação criada com sucess");
     return;
   }
   return (
