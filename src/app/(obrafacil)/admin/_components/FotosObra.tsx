@@ -69,9 +69,12 @@ export function FotosObra({ obraId }: { obraId: number }) {
 
         {preview && (
           <div className="w-full">
-            <img
+            <Image
               src={preview}
               alt="Preview"
+              width={160}
+              height={160}
+              unoptimized={true}
               className="rounded-lg border border-violet-300 w-40 h-40 object-cover"
             />
           </div>

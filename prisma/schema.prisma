@@ -7,7 +7,6 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
-
 model Account {
   id                 String  @id @default(cuid())
   userId             String  @map("user_id")
@@ -44,59 +43,45 @@ model User {
   email         String?   @unique
   emailVerified DateTime? @map("email_verified")
   image         String?
-    password   String? 
   accounts      Account[]
   sessions      Session[]
-  obras         Obra[]
+   saldoInicial  Float         @default(0)
+  trasancoes    Transacao[]
   @@map("users")
 }
  
-
+model VerificationToken {
+  identifier String
+  token      String
+  expires    DateTime
  
-model Obra {
-  id            Int                @id @default(autoincrement())
-  nomeCliente   String
-  telefone      String
-  endereco      String
-  tipoServico   String
-  descricao     String
-  prazoDias     Int
-  valorTotal    Float
-  materiais     OrcamentoItem[]    
-  maoDeObra     OrcamentoMaoObra[] 
-  createdAt     DateTime           @default(now())
-  updatedAt     DateTime           @updatedAt
-  status        String             @default("aguardando") 
-  publicId      String             @unique @default(uuid())
-  fotos        FotoObra[]
-  user          User               @relation(fields: [userId], references: [id])
-  userId        String
+  @@unique([identifier, token])
+  @@map("verification_tokens")
 }
 
-model FotoObra {
-  id        Int      @id @default(autoincrement())
+model Categoria {
+  id        String       @id @default(cuid())
   nome      String
-  caminho   String
-  createdAt DateTime @default(now())
-  obraId    Int
-  obra      Obra     @relation(fields: [obraId], references: [id])
+  cor       String       // Ex: "#5f10b9ff" (verde)
+  tipo      TipoCategoria // RECEITA ou DESPESA
+  transacoes Transacao[]
 }
 
-model OrcamentoItem {
-  id        Int     @id @default(autoincrement())
-  obra      Obra    @relation(fields: [obraId], references: [id])
-  obraId    Int
-  quantidade Int
-  descricao String
-  medida    String
-  valor     Float?
+model Transacao {
+  id           String      @id @default(cuid())
+  titulo       String
+  valor        Float
+  tipo         TipoCategoria // RECEITA ou DESPESA
+  data         DateTime      @default(now())
+  categoriaId  String
+  categoria    Categoria     @relation(fields: [categoriaId], references: [id])
+  userId       String
+  user         User          @relation(fields: [userId], references: [id])
+  createdAt    DateTime      @default(now())
 }
 
-model OrcamentoMaoObra {
-  id        Int     @id @default(autoincrement())
-  obra      Obra    @relation(fields: [obraId], references: [id])
-  obraId    Int
-  tipo      String
-  descricao String
-  valor     Float
+enum TipoCategoria {
+  RECEITA
+  DESPESA
 }
+
