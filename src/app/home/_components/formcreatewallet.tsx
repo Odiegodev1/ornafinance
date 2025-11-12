@@ -16,7 +16,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Select } from "@radix-ui/react-select";
-import { useForm } from "react-hook-form";
+import { useForm, type Resolver } from "react-hook-form";
 import { formSchema, FormSchema } from "../schema/formschema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { handleclick } from "../actions/createtransacoes";
@@ -32,7 +32,7 @@ interface FormProps {
 
 export function Formcreatewallet({ categorias }: FormProps) {
   const form = useForm<FormSchema>({
-    resolver: zodResolver(formSchema) as any,
+    resolver: zodResolver(formSchema) as unknown as Resolver<FormSchema>,
     defaultValues: {
       titulo: "",
       valor: 0,

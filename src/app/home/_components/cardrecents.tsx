@@ -13,7 +13,7 @@ type Transacao = {
   titulo: string;
   valor: number;
   tipo: string;
-  data: string;
+  data: Date;
   categoria: {
     nome: string;
     cor: string;
