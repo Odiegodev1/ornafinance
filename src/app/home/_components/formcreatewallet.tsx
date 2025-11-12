@@ -36,7 +36,7 @@ export function Formcreatewallet({ categorias }: FormProps) {
     defaultValues: {
       titulo: "",
       valor: 0,
-      tipo: "RECEITA",
+      tipo: "DESPESA",
       categoria: "",
       date: "",
     },
@@ -92,8 +92,11 @@ export function Formcreatewallet({ categorias }: FormProps) {
                     <SelectValue placeholder="Selecione o tipo de transação" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="RECEITA">Receita</SelectItem>
-                    <SelectItem value="DESPESA">Despesa</SelectItem>
+                   {["DESPESA", "RECEITA"].map((tipo) => (
+                      <SelectItem key={tipo} value={tipo}>
+                        {tipo}
+                      </SelectItem>
+                    ))}
                   </SelectContent>
                 </Select>
               </FormControl>

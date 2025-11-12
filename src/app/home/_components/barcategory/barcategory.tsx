@@ -15,7 +15,7 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart"
-import { getGastosPorCategoria } from "../../actions/getGastosPorCategoria"
+import { getTransacoesPorCategoria } from "../../actions/getGastosPorCategoria"
 
 interface CategoriaData {
   nome: string
@@ -41,7 +41,7 @@ export function ChartBarActive() {
 
   useEffect(() => {
     async function loadData() {
-      const categorias: CategoriaData[] = await getGastosPorCategoria()
+      const categorias: CategoriaData[] = await getTransacoesPorCategoria()
       const data = categorias.map((c) => ({
         browser: c.nome,
         Gastos: c.total,
@@ -53,7 +53,7 @@ export function ChartBarActive() {
     
       const config = categorias.reduce((acc, c) => {
         acc[c.nome] = { label: c.nome, color: c.cor }
-            console.log(c.nome)
+           
         return acc
     
       }, {} as Record<string, { label: string; color: string }>)
@@ -94,9 +94,9 @@ export function ChartBarActive() {
             />
             <Bar
               dataKey="Gastos"
-              strokeWidth={2}
+              strokeWidth={3}
               radius={8}
-              activeIndex={4}
+              activeIndex={2}
               activeBar={({ ...props }) => {
                 return (
                   <Rectangle
